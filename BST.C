@@ -52,6 +52,35 @@ void postorder(node *t)
 	}
 }
 
+void insertnode(node *t,int num)
+{
+	node *z;
+	while(t!=NULL)
+	{
+	 z=t;
+	 if(t->info>num)
+	 {
+		t=t->lp;
+	 }
+	 else
+	 {
+		t=t->rp;
+	 }
+
+	}
+	t=(node *)malloc(sizeof(node));
+	t->info=num;
+	t->lp=t->rp=NULL;
+	if(z->info>num)
+	{
+	z->lp=t;
+	}
+	else
+	{
+	z->rp=t;
+	}
+}
+
 void main()
 {
 	//int numbers[] = {10,20,50,3,9,8,-20,0,79,100},i;
@@ -60,10 +89,11 @@ void main()
 	clrscr();
 	do
 	{
-		printf("1. create BST\n");
+		printf("\n1. create BST\n");
 		printf("2. PreOrder\n");
 		printf("3. InOrder\n");
 		printf("4. PostOrder\n");
+		printf("5. Insert without recursion\n");
 		printf("0. Exit\n");
 
 		printf("Enter your choice : ");
@@ -93,6 +123,31 @@ void main()
 				break;
 			case 4 :
 				postorder(root);
+				break;
+			case 5 :
+					/*for(i=0;i<=9;i++)
+				{
+					root = createBST(root,numbers[i]);
+				} */
+				while(1)
+				{
+					printf("Enter number & -1 for exit");
+					scanf("%d",&number);
+					if(root==NULL)
+					{
+					 root=(node *)malloc(sizeof(node));
+					 root->info=number;
+					 root->lp=root->rp=NULL ;
+
+					}
+					else
+					{
+
+					if(number==-1)
+						break;
+					insertnode(root,number);
+					}
+				}
 				break;
 			default :
 				printf("Invalid choice ");
