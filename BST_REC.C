@@ -24,91 +24,33 @@ node *createBST(node *t,int num)
 
 void preorder(node *t)
 {
-	node *stack[10];
-	int i=0;
-	start:
-	while(t!=NULL)
+	if(t!=NULL)
 	{
 		printf("%d\t",t->info);
-		if(t->rp!=NULL)
-		{
-			stack[i]=t->rp;
-			i++;
-		}t=t->lp;
+		preorder(t->lp);
+		preorder(t->rp);
 	}
-	if(i!=0)
-	{
-		i--;
-		t=stack[i];
-		goto start;
-	}
-
 }
 
 void inorder(node *t)
 {
-	node *stack[10];
-	int i=0;
-	start:
-	while(t!=NULL)
+	if(t!=NULL)
 	{
-		stack[i]=t;
-		i++;
-		t=t->lp;
-	}
-	begin:
-	if(i!=0)
-	{
-		i--;
-		t=stack[i];
+		inorder(t->lp);
 		printf("%d\t",t->info);
-		if(t->rp!=NULL)
-		{
-			t=t->rp;
-			goto start;
-		}
-		goto begin;
+		inorder(t->rp);
 	}
 }
 
-struct postNode
-{	node *temp;
-	char ch;
-};
 void postorder(node *t)
 {
-	struct postNode stack[10];
-	int i=0;
-	char status;
-	start:
-	while(t!=NULL)
+	if(t!=NULL)
 	{
-		stack[i].ch='Y';
-		stack[i].temp=t;
-		i++;
-		if(t->rp!=NULL)
-		{
-			stack[i].ch='N';
-			stack[i].temp=t->rp;
-			i++;
-		}t=t->lp;
-	}
-	begin:
-	if(i!=0)
-	{
-		i--;
-		t=stack[i].temp;
-		status=stack[i].ch;
-		if(status=='N')
-		{
-			goto start;
-		}else{
-			printf("%d\t",t->info);
-			goto begin;
-		}
+		postorder(t->lp);
+		postorder(t->rp);
+		printf("%d\t",t->info);
 	}
 }
-
 void main()
 {
 	node *root= NULL;

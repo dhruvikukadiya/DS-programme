@@ -1,3 +1,5 @@
+//Insertion without recursion
+
 #include<stdio.h>
 typedef struct node
 {
@@ -22,6 +24,30 @@ node *createBST(node *t,int num)
 	return t;
 }
 
+node* insertNode(node *t,int num)
+{       node *root,*z;
+	root=t;
+	while(t!=NULL)
+	{
+		z=t;
+		if(t->info>num)
+		{
+			t=t->lp;
+		}else{
+			t=t->rp;
+		}
+	}
+	t=(node*)malloc(sizeof(node));
+	t->info=num;
+	t->lp=t->rp=NULL;
+	if(z->info>num)
+	{
+		z->lp=t;
+	}else{
+		z->rp=t;
+	}
+	return root;
+}
 void preorder(node *t)
 {
 	node *stack[10];
@@ -119,6 +145,7 @@ void main()
 		printf("\n2. Preorder");
 		printf("\n3. Inorder");
 		printf("\n4. Postorder");
+		printf("\n5. Insert Nodes");
 		printf("\n0. Exit");
 
 		printf("\nEnter your choice: ");
@@ -144,6 +171,16 @@ void main()
 				break;
 			case 4:
 				postorder(root);
+				break;
+			case 5:
+				while(1)
+				{
+				printf("Enter number and -1 to exit: ");
+				scanf("%d",&num);
+				if(num==-1)
+				break;
+				root=insertNode(root,num);
+				}
 				break;
 			case 0: printf("Good Bye, Thank You %c",2);
 				break;
