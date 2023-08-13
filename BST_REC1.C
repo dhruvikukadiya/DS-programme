@@ -65,7 +65,7 @@ node *search(node *t,int n)
 	return t;
 }
 
-void *deleteNode(node *t,int d)
+void deleteNode(node *t,int d)
 {
 	node *z,*x;
 	int temp;
